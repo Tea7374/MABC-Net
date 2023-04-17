@@ -1,3 +1,4 @@
-# CUC_dfd
+# MABC-Net
 
-The task of audio-visual joint forgery detection.
+This is the  implementation of "MABC-Net: Multimodal Mixed Attentional Network  with Balanced Class  for Temporal Forgery Localization."
+
