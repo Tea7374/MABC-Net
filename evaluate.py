@@ -5,7 +5,7 @@ import toml
 from dataset.lavdf import LAVDFDataModule
 from inference import inference_batfd
 from metrics import AP, AR
-from model import BATFD
+from .model/batfd_MA import BATFD
 from post_process import post_process
 from utils import read_json
 
@@ -27,9 +27,9 @@ if __name__ == '__main__':
     dm = LAVDFDataModule(root=args.data_root,
         frame_padding=config["num_frames"],
         max_duration=config["max_duration"],
-        batch_size=1, num_workers=3,
+        batch_size=1, num_workers=4,
         get_meta_attr=BATFD.get_meta_attr)
-    dm.setup()#读取数据进行加载
+    dm.setup()
 
     # prepare model
     model = BATFD.load_from_checkpoint(args.checkpoint)
@@ -39,9 +39,7 @@ if __name__ == '__main__':
 
     # postprocess by soft-nms
     metadata = dm.test_dataset.metadata
-    print("这里：",type(metadata))
     post_process(model_name, metadata, 25, alpha, t1, t2)
-    print("我猜没有错误了")
     proposals = read_json(f"output/results/{model_name}.json")
 
     # evaluate AP
