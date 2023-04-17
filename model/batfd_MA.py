@@ -14,7 +14,7 @@ from .boundary_module import BoundaryModule
 from .frame_classifier import FrameLogisticRegression
 from .fusion_module import ModalFeatureAttnBoundaryMapFusion
 from .video_encoder import C3DVideoEncoder
-from .HAN import *
+from .MA import *
 
 class BATFD(LightningModule):
 
